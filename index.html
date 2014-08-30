@@ -1,1 +1,42 @@
-Hello, world!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Thinkful calculator</title>
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+	<header></header>
+	<div class="main-content" role="main">
+		<h1 class="main-heading">Adder/Subtractor</h1>
+		
+		<form id="calulatorForm" method="post" action>
+			<fieldset>
+				<div class="error" id="errors">You have entered an invalid number.</div>
+				<div class="field-wrapper">
+					<label class="text-label" for="xValueField">X = </label>
+		    	<input class="text-box" type="text" name="name" id="xValueField" placeholder="Enter an Integer">
+				</div>
+
+				<div class="field-wrapper">
+		    	<label class="text-label" for="yValueField">Y = </label>
+		    	<input class="text-box" type="text" name="name" id="yValueField" placeholder="Enter an Integer">
+				</div>
+				
+				<div class="btn-wrapper">
+					<button class="btn add" id="btnAdd">+</button>
+					<button class="btn subtract" id="btnSubtract">-</button>
+				</div>
+			</fieldset>
+		</form>
+
+	<div class="result">
+		<p id="result"></p>
+	</div>
+	</div>
+	<footer></footer>
+
+<script src="js/scripts.js"></script>	
+</body>
+</html>
