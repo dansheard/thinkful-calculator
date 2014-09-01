@@ -1,74 +1,76 @@
+var calculator = (function (){
 
-var calculator = (function() {
+	var $form, 
+			errors = [],
+			validateElems = [],
+			operator,
+			xNumber = $("#xValueField"),
+			yNumber = $("#yValueField");		
 
-	var add = document.getElementById("btnAdd"),
-	subtract = document.getElementById("btnSubtract"),
-	elemArray = [],
-	result,
-	answer,
-	operator;
+	var validateNumber = function() {
+		$('.error').css("display", "none");
+		$('input').removeClass("error-field");
+		errors = [];
 
-	add.onclick = function adding(e) {		
-		var xVal = parseInt(document.getElementById("xValueField").value, 10),
-		yVal = parseInt(document.getElementById("yValueField").value, 10),
-		operator = '+';
+		validateElems = [xNumber, yNumber];
 
+		$.each(validateElems, function(key, value) {
+
+			if(isNaN(validateElems[key].val()) || validateElems[key].val() === "" ) {
+				$(validateElems[key].addClass("error-field"));
+
+				$(validateElems[key]).siblings(".error").css("display", "block");
+				errors.push(validateElems[key]);
+			} 
+    });
+	}
+
+	var addValues = function(e) {
 		e.preventDefault();
-		validateInput(elemArray);
+		validateNumber();
+		operator = "+"
+		var total = 0;
 
-		answer = xVal + yVal;
-		result = xVal + ' ' + operator + ' ' + yVal + ' ' + " = " + ' ' + answer;
-		document.getElementById("result").innerHTML = result;
+		if (errors.length === 0) {
+			answer = parseInt(validateElems[0].val()) + parseInt(validateElems[1].val());
+			result = validateElems[0].val() + " " + operator + " " + validateElems[1].val() + " " + " = " + answer;
+			showResult(result);
+		}
 	}
 
-	subtract.onclick = function subtracting(e) {
-		var xVal = parseInt(document.getElementById("xValueField").value, 10),
-		yVal = parseInt(document.getElementById("yValueField").value, 10),
-		operator = '-';
-
+		var subtractValues = function(e) {
 		e.preventDefault();
-		validateInput(elemArray);
+		validateNumber();
 
-		answer = xVal - yVal;
-		result = xVal + ' ' + operator + ' ' + yVal + ' ' + " = " + ' ' + answer;
-		document.getElementById("result").innerHTML = result;
-	}
-
-
-	var validateInput = function validateInput(validateArray) {
-		for (var i = 0; i < validateArray.length; i++) {
-
-			validateArray[i].style.border = "1px solid black";
-			document.getElementById("errors").style.display = "none";
-
-			if (isNaN(validateArray[i].value) || validateArray[i].value === "") {
-				document.getElementById("errors").style.display = "block";
-				validateArray[i].style.border = "1px solid red";
-			}
-
+		if (errors.length === 0) {
+			answer = parseInt(validateElems[0].val()) - parseInt(validateElems[1].val());
+			result = validateElems[0].val() + " " + operator + " " + validateElems[1].val() + " " + " = " + answer;
+			showResult(result);
 		}
 	}
 
+	var showResult = function(result) {
+		if (errors.length === 0) {
+			$('#result').html(result);
+		} 
+	}
 
-	var setUpForm = function setUpForm(form) {
-		var elem = form.elements;
-
-		for ( var i = 0;i < elem.length; i++ ) {
-			if (elem[i].getAttribute('data-validation')) {
-				elemArray.push(elem[i]);
-			}
-		}
-		return elemArray;
+	var setUpListeners = function() {
+		$("#btnAdd").click(addValues);
+		$("#btnSubtract").click(subtractValues);
 	};
-
-	return { 
-
-		init : function(form) {
-			setUpForm(form);
+	
+	return {
+		init: function(form) {
+			$form = form;
+			setUpListeners();
 		}
+	}
 
-	};
+})();
 
-}());
+calculator.init($("#calulatorForm"));
 
-calculator.init(document.getElementById("calulatorForm"));
+
+
+

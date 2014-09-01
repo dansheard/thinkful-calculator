@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Thinkful calculator</title>
 	<link rel="stylesheet" href="css/styles.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -13,15 +14,16 @@
 		
 		<form id="calulatorForm" method="post" action>
 			<fieldset>
-				<div class="error" id="errors">You have entered an invalid number.</div>
 				<div class="field-wrapper">
+					<p class="error" id="errors">Invalid number</p>
 					<label class="text-label" for="xValueField">X = </label>
-		    	<input class="text-box" type="text" name="name" id="xValueField" data-validation="number" placeholder="Enter an Integer">
+		    	<input class="text-box validate" type="text" name="name" id="xValueField" data-validation="number" placeholder="Enter an Integer">
 				</div>
 
 				<div class="field-wrapper">
+					<p class="error" id="errors">Invalid number</p>
 		    	<label class="text-label" for="yValueField">Y = </label>
-		    	<input class="text-box" type="text" name="name" id="yValueField" data-validation="number" placeholder="Enter an Integer">
+		    	<input class="text-box validate" type="text" name="name" id="yValueField" data-validation="number" placeholder="Enter an Integer">
 				</div>
 				
 				<div class="btn-wrapper">
